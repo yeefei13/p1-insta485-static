@@ -4,3 +4,9 @@ Templated Static Site Generator
 
 By Yifei Wang <yeefeiw@umich.edu>
 
+## Quick start
+```console
+$ python3 -m venv env/
+$ source env/bin/activate
+```
+
