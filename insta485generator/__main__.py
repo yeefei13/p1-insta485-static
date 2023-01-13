@@ -48,14 +48,14 @@ def main(input_dir, output, verbose):
             # if pathlib.Path.exists(opath) & pathlib.Path.exists(static_dir):
             #     shutil.rmtree(opath)
             if(j["url"].lstrip("/")!=""):
-                url.mkdir()
+                url.mkdir(parents=True)
             out = open(pathlib.Path.joinpath(opath, "index.html"), "w")
             out.write(content)
             click.echo("Rendered "+str(j["template"])+" -> " +
                        str(pathlib.Path.joinpath(opath, "index.html")))
-    # except FileNotFoundError:
-    #     print(1)
-    #     exit(1)
+    except FileNotFoundError:
+        print(1)
+        exit(1)
     except json.JSONDecodeError:
         print(2)
         exit(1)
