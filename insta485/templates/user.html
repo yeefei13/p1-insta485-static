@@ -56,24 +56,46 @@
     <div class="vl"> </div>
     <img src="/images/b.png" alt="insta485" style="width: 15%; height: 15%;">
     <h3 style="float:right">
-        <a class="blacklink" href="/explore/">explore</a> | <a class="blacklink" href="/users/awdeorio/">awdeorio</a>
+        <a class="blacklink" href="/explore/">explore</a> | <a class="blacklink" href={{'/users/%s'%logname}}>{{logname}}</a>
     </h3>
     <hr>
 
-    <p class="post" style="font-size: 40px; margin-top:7%; margin-bottom:0">awdeorio</p>
-    <p class="post il"></p>
-        2 posts&nbsp;
+    <p class="post" style="font-size: 40px; margin-top:7%; margin-bottom:0">{{username}}</p>
+
+    {%if logname != username and logname_follows_username%}
+    <p class="post">following</p>
+    {% elif logname != username%}
+    <p class="post">not following</p>
+    {% endif %}
+
+    {%if total_posts == 1%}
+        <p class="post il">
+            {{total_posts}} post
+        </p>
+        {%else%}
+        <p class="post il">
+            {{total_posts}} posts
+        </p>
+    {%endif%}
+
     <h4 class="il">
-        <a href="/users/awdeorio/followers/" class="blacklink">2 followers </a>&nbsp;
-        <a href="/users/awdeorio/following/" class="blacklink"> 2 following</a>
+        <a href="{{'/users/%s/followers/'%username}}" class="blacklink">
+            {%if followers == 1%}
+                    {{followers}} follower
+            {%else%}
+                    {{followers}} followers
+            {%endif%} 
+        </a>&nbsp;
+        <a href="{{'/users/%s/following/'%username}}" class="blacklink"> {{following}} following</a>
     </h4>
-    <p class="post">Andrew DeOrio</p>
-    <a href="/posts/1/" class="post">
-        <img src="/uploads/122a7d27ca1d7420a1072f695d9290fad4501a41.jpg" alt="post1" style="width: 40%; height: 40%;" >
+    <p class="post">{{fullname}}</p>
+
+    {%for p in posts%}
+    <a href="{{'/posts/%s/'%p.postid}}" class="post">
+        <img src="{{p.img_url}}" alt="post" style="width: 35%; height: 35%;">
     </a>
-    <a href="/posts/3/">
-        <img src="/uploads/9887e06812ef434d291e4936417d125cd594b38a.jpg" alt="post3" style="width: 40%; height: 40%;" >
-    </a>
+    {% endfor %}
+
 </body>
 
 </html>

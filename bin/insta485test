@@ -12,12 +12,20 @@
 set -Eeuo pipefail
 set -x
 
+pytest tests/
+
+pycodestyle insta485generator
+
+pydocstyle insta485generator
+
+pylint --disable=no-value-for-parameter insta485generator
+
 # Clean
 rm -rf insta485/html
 
 # Build
 insta485generator insta485
 
-# Serve
-cd insta485/html
-python3 -m http.server 8000
+html5validator --ignore JAVA_TOOL_OPTIONS --root html
+
+html5validator --ignore JAVA_TOOL_OPTIONS --root insta485/html
